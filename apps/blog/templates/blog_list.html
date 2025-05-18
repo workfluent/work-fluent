@@ -1,17 +1,31 @@
 {% extends "base.html" %}
 
 {% block title %}
-Blog Posts
+Blog Topics
 {% endblock %}
 
 {% block content %}
-<h1>here you see 5 Blog topics</h1>
-<ul>
-    {% for post in posts %}
-        <li>
-            <a href="{{ post.slug }}">{{ post.title }}</a>
-            <p>{{ post.published_at }}</p>
-        </li>
-    {% endfor %}
-</ul>
+<h1>Blog Topics</h1>
+<div class="topics">
+    <div class="topic-card">
+        <h2>Tech</h2>
+        <a href="{% url 'blogs_by_topic' 'tech' %}">View Blogs</a>
+    </div>
+    <div class="topic-card">
+        <h2>Health</h2>
+        <a href="{% url 'blogs_by_topic' 'health' %}">View Blogs</a>
+    </div>
+    <div class="topic-card">
+        <h2>Travel</h2>
+        <a href="{% url 'blogs_by_topic' 'travel' %}">View Blogs</a>
+    </div>
+    <div class="topic-card">
+        <h2>Education</h2>
+        <a href="{% url 'blogs_by_topic' 'education' %}">View Blogs</a>
+    </div>
+    <div class="topic-card">
+        <h2>Lifestyle</h2>
+        <a href="{% url 'blogs_by_topic' 'lifestyle' %}">View Blogs</a>
+    </div>
+</div>
 {% endblock %}
