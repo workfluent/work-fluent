@@ -15,6 +15,7 @@ def inquiry_form(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         company_name = request.POST.get('company_name', "")
+        company_website = request.POST.get('company_website', "")
         budget = request.POST.get('budget')
         message = request.POST.get('message')
 
@@ -24,12 +25,19 @@ def inquiry_form(request):
             return redirect('inquiry_form')
 
         # Save inquiry to the database
-        inquiry = Inquiry(name=name, email=email, company_name=company_name, budget=budget, message=message)
+        inquiry = Inquiry(
+            name=name,
+            email=email,
+            company_name=company_name,
+            company_website=company_website,
+            budget=budget,
+            message=message,
+        )
         try:
             inquiry.clean()  # Validate using the model's clean method
             inquiry.save()
         except ValidationError as e:
-            messages.error(request, str(e))
+            messages.error(request, " ".join(e.messages))  # Ensure error messages are user-friendly
             return redirect('inquiry_form')
 
         # Send email notification to admin
@@ -38,6 +46,7 @@ def inquiry_form(request):
                 'name': name,
                 'email': email,
                 'company_name': company_name,
+                'company_website': company_website,
                 'budget': budget,
                 'message': message,
             })
@@ -68,4 +77,4 @@ def inquiry_form(request):
 
         messages.success(request, "Your inquiry has been submitted successfully!")
         return redirect('thank_you')  # Redirect to the thank you page
-    return render(request, 'inquiry/inquiry_form.html')  # Corrected template path
+    return render(request, 'index.html')  # Ensure the correct template is rendered

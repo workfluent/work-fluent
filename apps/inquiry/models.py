@@ -13,6 +13,7 @@ class Inquiry(TimeStampedModel, UUIDModel, SoftDeleteModel):
     name = models.CharField(max_length=255)
     email = models.EmailField()
     company_name = models.CharField(max_length=255, blank=True, null=True)
+    company_website = models.URLField(max_length=255, blank=True, null=True)
     budget = models.CharField(max_length=50, choices=BUDGET_CHOICES)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
