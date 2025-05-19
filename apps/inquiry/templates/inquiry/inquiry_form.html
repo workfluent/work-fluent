@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}
-Home
+Inquiry Form
 {% endblock %}
 
 {% block content %}
-<h1>Welcome to WorkFluent</h1>
-<p>This is the homepage.</p>
-
+<h1>Submit Your Inquiry</h1>
 <form method="POST" action="{% url 'inquiry_form' %}">
     {% csrf_token %}
     <div>

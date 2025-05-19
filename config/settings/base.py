@@ -12,12 +12,14 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import environ
+import ssl
 
 # Initialize environment variables
 env = environ.Env()
 
 # Update BASE_DIR to point to the project root
-BASE_DIR = Path(__file__).resolve().parent.parent.parent  # Adjusted to point to the root directory
+BASE_DIR = Path(__file__).resolve().parent.parent.parent  \
+    # Adjusted to point to the root directory
 
 # Application definition
 DEFAULT_APPS = [
@@ -111,9 +113,19 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='your-email@example.com')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+# Email settings
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='your-email@example.com')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_SSL_CONTEXT = ssl._create_unverified_context()  # Disable SSL verification
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')  # Reference to the environment variable
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')  # Reference to the environment variable
 
 # Media files
 MEDIA_URL = '/media/'
@@ -122,3 +134,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Admins
+ADMINS = [("Admin Name", "admin@example.com")]
