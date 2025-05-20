@@ -5,41 +5,107 @@ Home
 {% endblock %}
 
 {% block content %}
-<h1>Welcome to WorkFluent</h1>
-<p>This is the homepage.</p>
+<!-- Hero Section -->
+<section class="hero">
+    <h1>Drive your business Automatic with WorkFluent</h1>
+    <p>Trusted by startups and entrepreneurs to work with</p>
+    <div class="hero-icons">
+        <span class="icon-circle"></span>
+        <span class="icon-triangle"></span>
+        <span class="icon-star"></span>
+        <span class="icon-circle"></span>
+    </div>
+</section>
 
-<form method="POST" action="{% url 'inquiry_form' %}">
-    {% csrf_token %}
-    <div>
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+<!-- Services Section -->
+<section class="services">
+    <h2>Services</h2>
+    <div class="services-grid">
+        <div class="service-item">
+            <div class="placeholder-box"></div>
+            <p>Business Automation</p>
+        </div>
+        <div class="service-item">
+            <div class="placeholder-box"></div>
+            <p>Business websites</p>
+        </div>
     </div>
-    <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+</section>
+
+<!-- Systems Section -->
+<section class="systems">
+    <h2>Systems</h2>
+    <div class="systems-grid">
+        <div class="system-item">
+            <div class="placeholder-box"></div>
+        </div>
+        <div class="system-item">
+            <div class="placeholder-box"></div>
+        </div>
+        <div class="system-item">
+            <div class="placeholder-box"></div>
+        </div>
+        <div class="system-item">
+            <div class="placeholder-box"></div>
+        </div>
     </div>
-    <div>
-        <label for="company_name">Company Name (Optional)</label>
-        <input type="text" id="company_name" name="company_name">
+</section>
+
+<!-- Founders Section -->
+<section class="founders">
+    <h2>The Founders</h2>
+    <div class="founders-grid">
+        <div class="founder-item">
+            <div class="placeholder-box"></div>
+            <p>Adel</p>
+        </div>
+        <div class="founder-item">
+            <div class="placeholder-box"></div>
+            <p>Ali</p>
+        </div>
+        <div class="founder-item">
+            <div class="placeholder-box"></div>
+            <p>Ella</p>
+        </div>
     </div>
-    <div>
-        <label for="company_website">Company Website (Optional)</label>
-        <input type="url" id="company_website" name="company_website" placeholder="Enter your company website">
-    </div>
-    <div>
-        <label for="budget">Budget</label>
-        <select id="budget" name="budget" required>
-            <option value="" disabled selected>Select your budget</option>
-            <option value="Less than 10,000">Less than 10,000</option>
-            <option value="Less than 20,000">Less than 20,000</option>
-            <option value="Between 20,000 and 50,000">Between 20,000 and 50,000</option>
-            <option value="More than 50,000">More than 50,000</option>
-        </select>
-    </div>
-    <div>
-        <label for="message">Tell us a bit about your business</label>
-        <textarea id="message" name="message" placeholder="Your message helps us know more about your business and prepare better before our call." maxlength="200" required></textarea>
-    </div>
-    <button type="submit">Submit Inquiry</button>
-</form>
+</section>
+
+<!-- Contact Form Section -->
+<section class="contact-form">
+    <h2>Contact form</h2>
+    <form method="POST" action="{% url 'inquiry_form' %}">
+        {% csrf_token %}
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="company_name">Company Name (Optional)</label>
+            <input type="text" id="company_name" name="company_name">
+        </div>
+        <div>
+            <label for="company_website">Company Website (Optional)</label>
+            <input type="url" id="company_website" name="company_website" placeholder="Enter your company website">
+        </div>
+        <div>
+            <label for="budget">Budget</label>
+            <select id="budget" name="budget" required>
+                <option value="" disabled selected>Select your budget</option>
+                <option value="Less than 10,000">Less than 10,000</option>
+                <option value="Less than 20,000">Less than 20,000</option>
+                <option value="Between 20,000 and 50,000">Between 20,000 and 50,000</option>
+                <option value="More than 50,000">More than 50,000</option>
+            </select>
+        </div>
+        <div>
+            <label for="message">Tell us a bit about your business</label>
+            <textarea id="message" name="message" placeholder="Your message helps us know more about your business and prepare better before our call." maxlength="200" required></textarea>
+        </div>
+        <button type="submit">Submit Inquiry</button>
+    </form>
+</section>
 {% endblock %}

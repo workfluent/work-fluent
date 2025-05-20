@@ -1,27 +1,44 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ topic.name }} Blogs
+    {{ topic.name }} - WorkFluent Blog
 {% endblock %}
 
 {% block content %}
-<h1>Blogs in {{ topic.name }}</h1>
-<ul>
-    {% for post in posts %}
-        <li>
-            <h2>{{ post.title }}</h2>
-            <p><strong>Published on:</strong> {{ post.published_at }}</p>
-            {% if post.image %}
-                <div>
-                    <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width: 100%; height: auto;" />
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="{{ topic.description|default:'Explore articles on ' }}{{ topic.name }} at WorkFluent Blog">
+    <meta name="keywords" content="{{ topic.keywords|default:topic.name }}, blog, WorkFluent, articles">
+
+    <!-- Blog Title Section -->
+    <header class="blog-header">
+        <h1>{{ topic.name }}</h1>
+    </header>
+
+    <!-- Articles Section -->
+    <section class="articles-section">
+        <div class="articles-list">
+            {% for post in posts %}
+                <article class="article-card" itemscope itemtype="http://schema.org/BlogPosting">
+                    <h2 itemprop="headline">{{ post.title }}</h2>
+                    <meta itemprop="datePublished" content="{{ post.created_at|date:'c' }}">
+                    <meta itemprop="author" content="WorkFluent Team">
+                    
+                    <!-- Featured Image -->
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }} featured image" class="blog-image" style="max-width: 800px; width: 100%; height: 400px; object-fit: cover; display: block; margin: 0 auto 20px;">
+                    {% else %}
+                        <img src="/static/images/default-blog-image.jpg" alt="{{ post.title }} featured image" class="blog-image" style="max-width: 800px; width: 100%; height: 400px; object-fit: cover; display: block; margin: 0 auto 20px;">
+                    {% endif %}
+                    
+                    <div class="article-content" itemprop="articleBody">
+                        {{ post.article|safe }}
+                    </div>
+                </article>
+            {% empty %}
+                <div class="no-articles">
+                    <p>No articles available for this topic.</p>
                 </div>
-            {% else %}
-                <p><em>No image available</em></p>
-            {% endif %}
-            <div>
-                <p>{{ post.article }}</p>
-            </div>
-        </li>
-    {% endfor %}
-</ul>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}

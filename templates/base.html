@@ -1,27 +1,35 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}WorkFluent{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="/blog/">Blog</a></li>
-                <li><a href="/inquiry/">Inquiry</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Systems</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="{% url 'blog_list' %}">Blog</a></li>
+                <li><a href="#" class="start-btn">Start</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
-        {% block content %}{% endblock %}
+        {% block content %}
+        {% endblock %}
     </main>
+
     <footer>
-        <p>&copy; 2025 WorkFluent. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="mailto:email@example.com">Email</a>
+            <a href="/impressum/">Impressum</a>
+            <a href="/social/">Social</a>
+        </div>
     </footer>
-    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
